@@ -5,8 +5,8 @@
 using namespace std;
 
 /**
- * @brief Перевіряє коректне значення, яке ввів користувач до системи
- * @param i Значення введене з клавіатури
+ * @brief Перевіряє коректне значення типу int, яке ввів користувач до системи
+ * @param i Значення типу int введене з клавіатури
  * @return Повертає коректне значення для подальшої роботи системи
 */
 int CheckIntValue(int i) {
@@ -25,6 +25,11 @@ int CheckIntValue(int i) {
 	}
 }
 
+/**
+ * @brief Перевіряє коректне значення типу float, яке ввів користувач до системи 
+ * @param i Значення типу float введене з клавіатури
+ * @return Повертає коректне значення для подальшої роботи системи
+*/
 float CheckFloatValue(float i) {
 
 	cin.ignore(666, '\n');
@@ -124,6 +129,10 @@ void OutputFiveSimpleBigestNumbers(int n) {
 	} while (simple_number != 5);	
 }
 
+/**
+ * @brief Обчислює суму мінімального серед непарних і максимальної серед парних значень у послідовності
+ * @param n Кількість членів послідовності
+*/
 void CalculateMinOfOddOnesMaxPairs(int n) {
 	float min = 10000000, max = -100000000, number;
 
@@ -142,6 +151,22 @@ void CalculateMinOfOddOnesMaxPairs(int n) {
 		}
 	}
 	cout << "Amount min and max value: " << min + max << endl;
+}
+
+/**
+ * @brief Знаходить суму членів ряду, розмірність яку задає користувач
+ * @param n Розмірність послідовності, заданий користувачем
+*/
+void AmountSequenceMembers(int n) {
+	double sum;
+	int x = 15, j = 7;
+
+	sum = sin(x) + sin(3 * x) / 3 + sin(5 * x) / 5;
+	for (int i = 0; i < n-3; i++) {
+		sum += sin(j * x) / j;
+		j += 2;
+	}
+	cout << "Amount of sequence members: " << sum << endl;
 }
 
 /**
@@ -173,7 +198,7 @@ int MenuOfSolution(int q) {
 	case 2:
 		char symbol;
 
-		cout << "Enter symbol to get the code of character: " << endl;
+		cout << "\nEnter symbol to get the code of character: " << endl;
 		cin >> symbol;
 		symbol = CheckCharValue(symbol);
 		OutputResponseUserCodeOfCharacter(symbol);
@@ -181,13 +206,28 @@ int MenuOfSolution(int q) {
 	case 3:
 		int n;
 
-		cout << "Enter N: ";
+		cout << "\nEnter number N: ";
 		cin >> n;
 		n = CheckIntValue(n);
 		OutputFiveSimpleBigestNumbers(n);
 		break;
 	case 4:
-		
+		int m;
+
+		cout << "\nEnter amount sequence members: ";
+		cin >> m;
+		m = CheckIntValue(m);
+		while (true) {
+			if (m < 3) {
+				cout << "Enter correct amount sequence members (must be > 0): ";
+				cin >> m;
+				m = CheckIntValue(m);
+			}
+			else {
+				break;
+			}
+		}
+		AmountSequenceMembers(m);
 		break;
 	default:
 		cout << "You don't enter any task for execution\n";
@@ -202,7 +242,7 @@ int main() {
 	cout << "\nCreated by Vladislav Samoilov / KNT - 223\n";
 
 	cout << "--------Select task:--------\n";
-	cout << "Task A) Calculate The Expressions Of M And P - Enter 1\n";
+	cout << "Task A) Calculate Min Of Odd Ones and Max of Pairs - Enter 1\n";
 	cout << "Task B) Output response cod of symbol - Enter 2\n";
 	cout << "Task C) Output 5 simple numbers bigger then user enter - Enter 3\n";
 	cout << "Task G) Natural Number Is Multiple Of Three Or Four - Enter 4\n";

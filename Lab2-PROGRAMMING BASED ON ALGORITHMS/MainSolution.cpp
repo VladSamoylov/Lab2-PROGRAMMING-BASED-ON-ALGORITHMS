@@ -67,6 +67,48 @@ void OutputResponseUserCodeOfCharacter(char symbol) {
 }
 
 /**
+ * @brief Перевіряє чи є число простим
+ * @param n Число, яке потрібно перевірити
+ * @return Повертає true або false перевіренного числа
+*/
+bool CheckSimpleNumber(int n) {
+	
+	if (n <= 1) {
+		return false;
+	}
+	if (n <= 3 && n > 1) {
+		return true;
+	}
+	if (n % 2 == 0 || n % 3 == 0) {
+		return false;
+	}
+	for (int i = n-1; i > 1; i--) {
+		if (n % i == 0) {
+			return false;
+		}
+	}
+	return true;
+}
+
+/**
+ * @brief Виводить 5 простих чисел, які більші за те число, яке ввів користувач
+ * @param n Число яке ввів користувач
+*/
+void OutputFiveSimpleBigestNumbers(int n) {
+
+	int simple_number = 1;
+
+	n = n + 1;
+	do {
+		if (CheckSimpleNumber(n)) {
+			cout << "Simple number #" << simple_number << ": " << n << endl;
+			simple_number++; 
+		}
+		n++;
+	} while (simple_number != 5);	
+}
+
+/**
  * @brief Інтерфейс який дає змогу користувачу працювати з додатком
  * @param q Вибір виконуваного завдання, яке задається користувачем з клавіатури
  * @return Повертає саме себе для продовження роботи користувача з додатком
@@ -80,13 +122,18 @@ int MenuOfSolution(int q) {
 	case 2:
 		char symbol;
 
-		cout << "Enter symbol to get the code of character" << endl;
+		cout << "Enter symbol to get the code of character: " << endl;
 		cin >> symbol;
 		symbol = CheckCharValue(symbol);
 		OutputResponseUserCodeOfCharacter(symbol);
 		break;
 	case 3:
-		
+		int n;
+
+		cout << "Enter N: ";
+		cin >> n;
+		n = CheckIntValue(n);
+		OutputFiveSimpleBigestNumbers(n);
 		break;
 	case 4:
 		
@@ -105,13 +152,13 @@ int main() {
 
 	cout << "--------Select task:--------\n";
 	cout << "Task A) Calculate The Expressions Of M And P - Enter 1\n";
-	cout << "Task B) Calculate Func For Real Number - Enter 2\n";
-	cout << "Task C) Calculate Angle Of Minutes And Time - Enter 3\n";
+	cout << "Task B) Output response cod of symbol - Enter 2\n";
+	cout << "Task C) Output 5 simple numbers bigger then user enter - Enter 3\n";
 	cout << "Task G) Natural Number Is Multiple Of Three Or Four - Enter 4\n";
 	cout << "------------------------------------------------------------\n";
 	cin >> q;
 	q = CheckIntValue(q);
-	MenuOfSolution(q);
-
+	MenuOfSolution(q);	
+	
 	return main();
 }

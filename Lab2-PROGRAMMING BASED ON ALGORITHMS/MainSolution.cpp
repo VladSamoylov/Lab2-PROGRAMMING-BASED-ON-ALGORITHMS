@@ -245,7 +245,7 @@ int main() {
 	cout << "Task A) Calculate Min Of Odd Ones and Max of Pairs - Enter 1\n";
 	cout << "Task B) Output response cod of symbol - Enter 2\n";
 	cout << "Task C) Output 5 simple numbers bigger then user enter - Enter 3\n";
-	cout << "Task G) Natural Number Is Multiple Of Three Or Four - Enter 4\n";
+	cout << "Task G) Amount Sequence Members - Enter 4\n";
 	cout << "------------------------------------------------------------\n";
 	cin >> q;
 	q = CheckIntValue(q);

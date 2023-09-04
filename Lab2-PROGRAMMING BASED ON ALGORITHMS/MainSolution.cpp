@@ -25,6 +25,22 @@ int CheckIntValue(int i) {
 	}
 }
 
+float CheckFloatValue(float i) {
+
+	cin.ignore(666, '\n');
+	while (true) {
+		if (cin.fail()) {
+			cin.clear();
+			cin.ignore(666, '\n');
+			cout << "You enter wrong data! Please enter correct data: \n";
+			cin >> i;
+		}
+		else {
+			return i;
+		}
+	}	
+}
+
 /**
  * @brief Перевіряє коректне значення символа, яке ввів користувач
  * @param symbol Символ введений з клавіатури
@@ -108,6 +124,26 @@ void OutputFiveSimpleBigestNumbers(int n) {
 	} while (simple_number != 5);	
 }
 
+void CalculateMinOfOddOnesMaxPairs(int n) {
+	float min = 10000000, max = -100000000, number;
+
+	for (int i = 1; i < n+1; i++) {
+		cout << "Enter #" << i << " sequence member: ";
+		cin >> number;
+		if (i % 2 == 0) {
+			if (max < number) {
+				max = number;
+			}
+		}
+		else {
+			if (min > number) {
+				min = number;
+			}
+		}
+	}
+	cout << "Amount min and max value: " << min + max << endl;
+}
+
 /**
  * @brief Інтерфейс який дає змогу користувачу працювати з додатком
  * @param q Вибір виконуваного завдання, яке задається користувачем з клавіатури
@@ -117,7 +153,22 @@ int MenuOfSolution(int q) {
 
 	switch (q) {
 	case 1:
+		int k;
 		
+		cout << "\nEnter amount sequence members: ";
+		cin >> k;
+		k = CheckIntValue(k);
+		while (true) {
+			if (k <= 0) {
+				cout << "Enter correct amount sequence members (must be > 0): ";
+				cin >> k;
+				k = CheckIntValue(k);
+			}
+			else {
+				break;
+			}
+		}
+		CalculateMinOfOddOnesMaxPairs(k);
 		break;
 	case 2:
 		char symbol;

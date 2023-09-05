@@ -68,6 +68,27 @@ char CheckCharValue(char symbol) {
 }
 
 /**
+ * @brief Перевіряє необхідну мінімальну кількість членів числової послідовності
+ * @param i Кількість членів послідовності введена користувачем
+ * @param n Мінімальна кількість членів послідовності повинна буди більша за це число
+ * @return Повертає коректну кількість членів послідовності
+*/
+int CheckCorrectAmountSequenceMembers(int i, int n) {
+
+	while (true) {
+		if (i <= n) {
+			cout << "Enter correct amount sequence members (must be > "<< n << "): ";
+			cin >> i;
+			i = CheckIntValue(i);
+		}
+		else {
+			break;
+		}
+	}
+	return i;
+}
+
+/**
  * @brief Виводить у відповідь на введений користувачем символ його код
  * @param symbol Символ який необхідно обробити
 */
@@ -136,21 +157,26 @@ void OutputFiveSimpleBigestNumbers(int n) {
 void CalculateMinOfOddOnesMaxPairs(int n) {
 	float min = 10000000, max = -100000000, number;
 
-	for (int i = 1; i < n+1; i++) {
-		cout << "Enter #" << i << " sequence member: ";
-		cin >> number;
-		if (i % 2 == 0) {
-			if (max < number) {
-				max = number;
+	if (n >= 2) {
+		for (int i = 1; i < n + 1; i++) {
+			cout << "Enter #" << i << " sequence member: ";
+			cin >> number;
+			if (i % 2 == 0) {
+				if (max < number) {
+					max = number;
+				}
+			}
+			else {
+				if (min > number) {
+					min = number;
+				}
 			}
 		}
-		else {
-			if (min > number) {
-				min = number;
-			}
-		}
+		cout << "Amount min and max value: " << min + max << endl;
 	}
-	cout << "Amount min and max value: " << min + max << endl;
+	else {
+		cout << "Amount min and max value is not enable for members < 2!\n";
+	}	
 }
 
 /**
@@ -175,6 +201,7 @@ void AmountSequenceMembers(int n) {
  * @return Повертає саме себе для продовження роботи користувача з додатком
 */
 int MenuOfSolution(int q) {
+	int n1 = 0, n4 = 2;
 
 	switch (q) {
 	case 1:
@@ -183,16 +210,7 @@ int MenuOfSolution(int q) {
 		cout << "\nEnter amount sequence members: ";
 		cin >> k;
 		k = CheckIntValue(k);
-		while (true) {
-			if (k <= 0) {
-				cout << "Enter correct amount sequence members (must be > 0): ";
-				cin >> k;
-				k = CheckIntValue(k);
-			}
-			else {
-				break;
-			}
-		}
+		k = CheckCorrectAmountSequenceMembers(k, n1);
 		CalculateMinOfOddOnesMaxPairs(k);
 		break;
 	case 2:
@@ -217,16 +235,7 @@ int MenuOfSolution(int q) {
 		cout << "\nEnter amount sequence members: ";
 		cin >> m;
 		m = CheckIntValue(m);
-		while (true) {
-			if (m < 3) {
-				cout << "Enter correct amount sequence members (must be > 0): ";
-				cin >> m;
-				m = CheckIntValue(m);
-			}
-			else {
-				break;
-			}
-		}
+		m = CheckCorrectAmountSequenceMembers(m, n4);
 		AmountSequenceMembers(m);
 		break;
 	default:

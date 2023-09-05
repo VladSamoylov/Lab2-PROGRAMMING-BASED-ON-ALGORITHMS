@@ -89,6 +89,30 @@ int CheckCorrectAmountSequenceMembers(int i, int n) {
 }
 
 /**
+ * @brief Перевіряє чи є число простим
+ * @param n Число, яке потрібно перевірити
+ * @return Повертає true або false перевіренного числа
+*/
+bool CheckSimpleNumber(int n) {
+
+	if (n <= 1) {
+		return false;
+	}
+	if (n <= 3 && n > 1) {
+		return true;
+	}
+	if (n % 2 == 0 || n % 3 == 0) {
+		return false;
+	}
+	for (int i = n - 1; i > 1; i--) {
+		if (n % i == 0) {
+			return false;
+		}
+	}
+	return true;
+}
+
+/**
  * @brief Виводить у відповідь на введений користувачем символ його код
  * @param symbol Символ який необхідно обробити
 */
@@ -106,30 +130,6 @@ void OutputResponseUserCodeOfCharacter(char symbol) {
 			}
 		}
 	}
-}
-
-/**
- * @brief Перевіряє чи є число простим
- * @param n Число, яке потрібно перевірити
- * @return Повертає true або false перевіренного числа
-*/
-bool CheckSimpleNumber(int n) {
-	
-	if (n <= 1) {
-		return false;
-	}
-	if (n <= 3 && n > 1) {
-		return true;
-	}
-	if (n % 2 == 0 || n % 3 == 0) {
-		return false;
-	}
-	for (int i = n-1; i > 1; i--) {
-		if (n % i == 0) {
-			return false;
-		}
-	}
-	return true;
 }
 
 /**
